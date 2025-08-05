@@ -1,0 +1,35 @@
+<!-- src/main/resources/templates/index.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tsinjo - HEI Emergency Fund</title>
+</head>
+<body>
+<h1>Tsinjo Emergency Fund</h1>
+
+<!-- Donation Form -->
+<form th:action="@{/donate}" method="post">
+    <input type="email" name="donor.email" placeholder="Email" required>
+    <input type="text" name="donor.fullName" placeholder="Full Name" required>
+    <input type="number" name="payment.amount" placeholder="Amount" step="0.01" required>
+    <select name="payment.paymentMethod" required>
+        <option value="Mvola">Mvola</option>
+        <option value="Airtel Money">Airtel Money</option>
+        <option value="Orange Money">Orange Money</option>
+        <option value="Bank Transfer">Bank Transfer</option>
+    </select>
+    <button type="submit">Make Donation</button>
+</form>
+
+<!-- Donations List -->
+<h2>Recent Donations</h2>
+<div th:each="donation : ${donations}">
+    <p>
+        <span th:text="${donation.donor.fullName}"></span> donated
+        <span th:text="${donation.payment.amount}"></span> on
+        <span th:text="${donation.registrationDate}"></span>
+    </p>
+</div>
+</body>
+</html>
