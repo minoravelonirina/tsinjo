@@ -7,9 +7,9 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Payement {
-    private String id;
-    private String date;
-    private double amount;
-    private String paymentMethod;
-    private PaymentStatus status;
+  private String id;
+  private String date;
+  private double amount;
+  private String paymentMethod;
+  private PaymentStatus status;
 }

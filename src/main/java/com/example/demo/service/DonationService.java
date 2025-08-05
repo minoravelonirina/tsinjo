@@ -9,24 +9,24 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DonationService {
-    private final DonationRepository donationRepository;
-    private final VolaService volaService;
+  private final DonationRepository donationRepository;
+  private final VolaService volaService;
 
-    public DonationService(DonationRepository donationRepository, VolaService volaService) {
-        this.donationRepository = donationRepository;
-        this.volaService = volaService;
-    }
+  public DonationService(DonationRepository donationRepository, VolaService volaService) {
+    this.donationRepository = donationRepository;
+    this.volaService = volaService;
+  }
 
-    @Transactional
-    public Donation processDonation(Donation donation) {
-        donation.getPayment().setStatus(PaymentStatus.VERIFYING);
-        Donation savedDonation = donationRepository.save(donation);
-        verifyPaymentAsync(savedDonation.getId());
-        return savedDonation;
-    }
+  @Transactional
+  public Donation processDonation(Donation donation) {
+    donation.getPayment().setStatus(PaymentStatus.VERIFYING);
+    Donation savedDonation = donationRepository.save(donation);
+    verifyPaymentAsync(savedDonation.getId());
+    return savedDonation;
+  }
 
-    @Async
-    public void verifyPaymentAsync(String donationId) {
-        // Async verification logic with Vola
-    }
+  @Async
+  public void verifyPaymentAsync(String donationId) {
+    // Async verification logic with Vola
+  }
 }
